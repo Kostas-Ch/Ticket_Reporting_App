@@ -12,6 +12,6 @@ package com.travelcompany.eshop.ticket_reporting_app;
 public class Ticket_Reporting_App {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        
     }
 }
