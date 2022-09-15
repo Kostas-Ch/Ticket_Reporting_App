@@ -1,13 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.travelcompany.eshop.ticket_reporting_app.domain;
 
-/**
- *
- * @author Xatzifire
- */
+
 public class Customer {
     private long id;
     private String Name;
@@ -24,9 +18,27 @@ public class Customer {
         this.address = address;
         this.category = category;
     }
-
+    
     public Customer() {
     }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    
 
     
     public long getId() {

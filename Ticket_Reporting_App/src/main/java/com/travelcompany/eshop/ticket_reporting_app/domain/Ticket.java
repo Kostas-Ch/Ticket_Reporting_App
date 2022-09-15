@@ -8,20 +8,13 @@ import java.math.BigDecimal;
 
 /**
  *
- * @author Xatzifire
+ * @author Kostas Chatzifotiadis
  */
-public class IndividualCustomer extends Customer {
-    
-    private BigDecimal surcharge;
-
-    public BigDecimal getSurcharge() {
-        return surcharge;
-    }
-
-    public void setSurcharge(BigDecimal surcharge) {
-        this.surcharge = surcharge;
-    }
-    
-    
-    
+public class Ticket {
+    private BigDecimal ticketprice;
+    private BigDecimal discount;
+    private Customer passengerId;
+    private int id;
+    private String paymentMethod;
+    private BigDecimal paymentAmount;
 }

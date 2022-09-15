@@ -7,7 +7,7 @@ package com.travelcompany.eshop.ticket_reporting_app;
 
 /**
  *
- * @author Xatzifire
+ * @author Kostas Chatzifotiadis
  */
 public class Ticket_Reporting_App {
 
