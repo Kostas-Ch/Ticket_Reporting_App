@@ -1,6 +1,8 @@
 
 package com.travelcompany.eshop.ticket_reporting_app.domain;
 
+import java.math.BigDecimal;
+
 
 public class Customer {
     private long id;
@@ -9,6 +11,7 @@ public class Customer {
     private String email;
     private String address;
     private String category;
+    
 
     public Customer(long id, String Name, String nationality, String email, String address, String category) {
         this.id = id;

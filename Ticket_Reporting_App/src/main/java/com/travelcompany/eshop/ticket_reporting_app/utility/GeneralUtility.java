@@ -60,7 +60,11 @@ public class GeneralUtility {
         return true;
     }
     
-    
+    public static boolean isPayedByCreditCard(Ticket ticket){
+        
+        
+        return true;
+    }
     
     
     

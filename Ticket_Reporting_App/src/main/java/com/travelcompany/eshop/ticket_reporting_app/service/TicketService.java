@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.travelcompany.eshop.ticket_reporting_app.domain;
+package com.travelcompany.eshop.ticket_reporting_app.service;
 
 /**
  *
- * @author Xatzifire
+ * @author Kostas Chatzifotiadis
  */
-public class BuisinessCustomer extends Customer{
+public class TicketService {
     
 }
