@@ -5,6 +5,7 @@
 package com.travelcompany.eshop.ticket_reporting_app.utility;
 
 import com.travelcompany.eshop.ticket_reporting_app.domain.Customer;
+import com.travelcompany.eshop.ticket_reporting_app.domain.Itinary;
 import com.travelcompany.eshop.ticket_reporting_app.domain.Ticket;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -53,9 +54,15 @@ public class GeneralUtility {
         return true;
     }
     
+    public static boolean isValidItinary(Itinary itinary){
+        if (itinary.getDepartureAirportCode()== null) return false;
+        if (itinary.getDestinationAirportCode()==null) return false;
+        return true;
+    }
+    
+    
+    
     public static boolean isValidTicket(Ticket ticket){
-       
-        
         
         return true;
     }

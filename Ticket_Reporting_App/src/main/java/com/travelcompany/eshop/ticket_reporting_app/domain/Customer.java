@@ -1,6 +1,8 @@
 
 package com.travelcompany.eshop.ticket_reporting_app.domain;
 
+import com.travelcompany.eshop.ticket_reporting_app.exception.CustomerException;
+import com.travelcompany.eshop.ticket_reporting_app.utility.GeneralUtility;
 import java.math.BigDecimal;
 
 
@@ -13,13 +15,16 @@ public class Customer {
     private String category;
     
 
-    public Customer(long id, String Name, String nationality, String email, String address, String category) {
+    public Customer(long id, String Name, String nationality, String email, String address, String category) throws CustomerException {
+        if(!GeneralUtility.isValidEmail(email))
+            throw new CustomerException("Invalid email.Please try again");
         this.id = id;
         this.Name = Name;
         this.nationality = nationality;
         this.email = email;
         this.address = address;
         this.category = category;
+        
     }
     
     public Customer() {
@@ -75,6 +80,11 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" + "id=" + id + ", Name=" + Name + ", nationality=" + nationality + ", email=" + email + ", address=" + address + ", category=" + category + '}';
     }
     
     

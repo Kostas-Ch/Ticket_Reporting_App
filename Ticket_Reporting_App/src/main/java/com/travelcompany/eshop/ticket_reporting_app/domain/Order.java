@@ -4,14 +4,19 @@
  */
 package com.travelcompany.eshop.ticket_reporting_app.domain;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Kostas Chatzifotiadis
  */
 public class Order {
-    private Ticket ticket;
-    private int quantity;
+    private long id;  
+    private Customer customer;
     private LocalDateTime date;
+    private List<OrderTickets> orderTickets= new ArrayList<>();
+    
 }
