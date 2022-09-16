@@ -18,5 +18,52 @@ public class Order {
     private Customer customer;
     private LocalDateTime date;
     private List<OrderTickets> orderTickets= new ArrayList<>();
+
+    public Order(long id, Customer customer, LocalDateTime date) {
+        this.id = id;
+        this.customer = customer;
+        this.date = date;
+    }
+
+    public Order() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public List<OrderTickets> getOrderTickets() {
+        return orderTickets;
+    }
+
+    public void setOrderTickets(List<OrderTickets> orderTickets) {
+        this.orderTickets = orderTickets;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" + "id=" + id + ", customer=" + customer + ", date=" + date + ", orderTickets=" + orderTickets + '}';
+    }
+    
     
 }

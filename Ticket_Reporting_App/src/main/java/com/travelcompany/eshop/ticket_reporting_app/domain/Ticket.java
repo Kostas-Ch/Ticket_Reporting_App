@@ -1,26 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.travelcompany.eshop.ticket_reporting_app.domain;
 
+import com.travelcompany.eshop.ticket_reporting_app.exception.TicketException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-/**
- *
- * @author Kostas Chatzifotiadis
- */
+
 public class Ticket {
     private long id;
     private BigDecimal price;
-    private Customer customer;
     private Category category;
 
-    public Ticket(long id, BigDecimal price, Customer customer, Category category) {
+    public Ticket(long id, BigDecimal price,  Category category) throws TicketException {
         this.id = id;
         this.price = price;
-        this.customer = customer;
         this.category = category;
     }
 
@@ -40,13 +33,6 @@ public class Ticket {
         this.price = price;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
 
     public Category getCategory() {
         return category;
@@ -58,7 +44,7 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return "Ticket{" + "id=" + id + ", price=" + price + ", customer=" + customer + ", category=" + category + '}';
+        return "Ticket{" + "id=" + id + ", price=" + price + ", customer=" + ", category=" + category + '}';
     }
     
     

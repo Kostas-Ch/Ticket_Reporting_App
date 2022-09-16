@@ -4,6 +4,7 @@
  */
 package com.travelcompany.eshop.ticket_reporting_app.domain;
 
+import com.travelcompany.eshop.ticket_reporting_app.exception.ItinaryException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -13,11 +14,11 @@ public class Itinary {
     private long id;
     private String departureAirportCode;
     private String destinationAirportCode;
-    private LocalDateTime departureDate;
+    private String departureDate;
     private String airline;
     private BigDecimal basicPrice;
 
-    public Itinary(long id, String departureAirportCode, String destinationAirportCode, LocalDateTime departureDate, String airline, BigDecimal basicPrice) {
+    public Itinary(long id, String departureAirportCode, String destinationAirportCode, String departureDate, String airline, BigDecimal basicPrice) throws ItinaryException {
         this.id = id;
         this.departureAirportCode = departureAirportCode;
         this.destinationAirportCode = destinationAirportCode;
@@ -53,11 +54,11 @@ public class Itinary {
         this.destinationAirportCode = destinationAirportCode;
     }
 
-    public LocalDateTime getDepartureDate() {
+    public String getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(LocalDateTime departureDate) {
+    public void setDepartureDate(String departureDate) {
         this.departureDate = departureDate;
     }
 

@@ -6,6 +6,7 @@ package com.travelcompany.eshop.ticket_reporting_app.repository;
 
 import com.travelcompany.eshop.ticket_reporting_app.domain.Customer;
 import com.travelcompany.eshop.ticket_reporting_app.domain.Ticket;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -16,6 +17,6 @@ public interface TicketRepository {
     boolean addTicket(Ticket ticket);
     List<Ticket> readTicket();
     Ticket readTicket(long ticketId);
-    boolean updateTicket(long ticketId,String paymentMethod);
+    boolean updateTicket(long ticketId,BigDecimal price);
     boolean deleteTicket(long ticketId);
 }

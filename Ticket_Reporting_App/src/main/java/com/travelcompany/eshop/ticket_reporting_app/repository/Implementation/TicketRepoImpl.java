@@ -8,6 +8,7 @@ import com.travelcompany.eshop.ticket_reporting_app.domain.Itinary;
 import com.travelcompany.eshop.ticket_reporting_app.domain.Ticket;
 import com.travelcompany.eshop.ticket_reporting_app.repository.TicketRepository;
 import com.travelcompany.eshop.ticket_reporting_app.utility.GeneralUtility;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,17 +46,17 @@ public class TicketRepoImpl implements TicketRepository {
         return null;
     }    
     @Override
-    public boolean updateTicket(long ticketId,String paymentMethod) {
+    public boolean updateTicket(long ticketId,BigDecimal price) {
         Ticket ticket = readTicket(ticketId);
         if( ticket == null) return false;
         
         for (Ticket curTicket:tickets){
-            if (curTicket.getPaymentMethod()!=null && curTicket.getPaymentMethod().equals(paymentMethod)){
+            if (curTicket.getPrice()!=null && curTicket.getPrice().equals(price)){
                    return false;
             }
         }
         
-        ticket.setPaymentMethod(paymentMethod);
+        ticket.setPrice(price);
         return true;
     }
     @Override
