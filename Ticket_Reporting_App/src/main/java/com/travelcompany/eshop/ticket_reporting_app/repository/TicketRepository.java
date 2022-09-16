@@ -17,6 +17,6 @@ public interface TicketRepository {
     boolean addTicket(Ticket ticket);
     List<Ticket> readTicket();
     Ticket readTicket(long ticketId);
-    boolean updateTicket(long ticketId,BigDecimal price);
+    boolean updateTicket(long ticketId,long price);
     boolean deleteTicket(long ticketId);
 }

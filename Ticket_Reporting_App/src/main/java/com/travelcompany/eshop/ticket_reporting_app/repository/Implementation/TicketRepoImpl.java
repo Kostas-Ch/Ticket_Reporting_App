@@ -46,15 +46,12 @@ public class TicketRepoImpl implements TicketRepository {
         return null;
     }    
     @Override
-    public boolean updateTicket(long ticketId,BigDecimal price) {
+    public boolean updateTicket(long ticketId,long price) {
         Ticket ticket = readTicket(ticketId);
         if( ticket == null) return false;
         
-        for (Ticket curTicket:tickets){
-            if (curTicket.getPrice()!=null && curTicket.getPrice().equals(price)){
-                   return false;
-            }
-        }
+       
+        
         
         ticket.setPrice(price);
         return true;

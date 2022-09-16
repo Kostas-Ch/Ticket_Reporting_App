@@ -6,6 +6,7 @@ package com.travelcompany.eshop.ticket_reporting_app.utility;
 
 import com.travelcompany.eshop.ticket_reporting_app.domain.Customer;
 import com.travelcompany.eshop.ticket_reporting_app.domain.Itinary;
+import com.travelcompany.eshop.ticket_reporting_app.domain.OrderTickets;
 import com.travelcompany.eshop.ticket_reporting_app.domain.Ticket;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,8 +19,8 @@ public class GeneralUtility {
     
     //long id, String name, String email, String address, String nationality, String Category
     public static String[] customers = {
-        "1, Maria Iordanou, miordanou@mail.com, Athens, Greek, Individual",
-        "2, Dimitriou Dimitrios, ddimitriou@mail.com, Athens, Greek, Individual",
+        "1,Maria Iordanou,miordanou@mail.com,Athens,Greek,Individual",
+        "2,Dimitriou Dimitrios,ddimitriou@mail.com,Athens,Greek,Individual",
         "3, Ioannis Ioannou, iioannou@mail.com, Athens, Greek, Business",
         "4, Antonio Molinari, amolinari@mail.com, Milan, Italian, Individual",
         "5, Frederico Rossi, frossi@mail.com, Milan, Italian, Individual",
@@ -72,19 +73,28 @@ public class GeneralUtility {
         return true;
     }
     
+ 
     
-    
-    public static boolean isValidTicket(Ticket ticket){
+    public static boolean isPayedByCreditCard(OrderTickets orderticket){
+        
+        if( orderticket.getPaymentMethod().toLowerCase() == "cash")
+            return false;
+            
+        else
+            orderticket.setDiscount(0.1);
         
         return true;
     }
     
-    public static boolean isPayedByCreditCard(Ticket ticket){
-        
+    public static boolean isBuisiness(OrderTickets orderticket){
+        Customer customer = new Customer();
+       if( customer.getCategory().toLowerCase() == "business")
+        orderticket.setDiscount(0.1);
+       else 
+        orderticket.setSurcharge(0.2);   
         
         return true;
     }
-    
     
     
 }

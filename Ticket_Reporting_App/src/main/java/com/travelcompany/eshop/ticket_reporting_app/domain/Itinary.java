@@ -16,9 +16,9 @@ public class Itinary {
     private String destinationAirportCode;
     private String departureDate;
     private String airline;
-    private BigDecimal basicPrice;
+    private long basicPrice;
 
-    public Itinary(long id, String departureAirportCode, String destinationAirportCode, String departureDate, String airline, BigDecimal basicPrice) throws ItinaryException {
+    public Itinary(long id, String departureAirportCode, String destinationAirportCode, String departureDate, String airline, long basicPrice) throws ItinaryException {
         this.id = id;
         this.departureAirportCode = departureAirportCode;
         this.destinationAirportCode = destinationAirportCode;
@@ -70,11 +70,11 @@ public class Itinary {
         this.airline = airline;
     }
 
-    public BigDecimal getBasicPrice() {
+    public long getBasicPrice() {
         return basicPrice;
     }
 
-    public void setBasicPrice(BigDecimal basicPrice) {
+    public void setBasicPrice(long basicPrice) {
         this.basicPrice = basicPrice;
     }
 

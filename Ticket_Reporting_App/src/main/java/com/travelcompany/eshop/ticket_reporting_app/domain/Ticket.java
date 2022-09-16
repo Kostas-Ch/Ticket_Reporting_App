@@ -8,11 +8,15 @@ import java.time.LocalDateTime;
 
 public class Ticket {
     private long id;
-    private BigDecimal price;
+    private long price;
     private Category category;
+    private long itinaryId;
+    private long customerId;
 
-    public Ticket(long id, BigDecimal price,  Category category) throws TicketException {
+    public Ticket(long id, long customerId,long itinaryId, long price,  Category category) throws TicketException {
         this.id = id;
+        this.customerId = customerId;
+        this.itinaryId = itinaryId;
         this.price = price;
         this.category = category;
     }
@@ -21,15 +25,31 @@ public class Ticket {
         return id;
     }
 
+    public long getItinaryId() {
+        return itinaryId;
+    }
+
+    public void setItinaryId(long itinaryId) {
+        this.itinaryId = itinaryId;
+    }
+
+    public long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
+    }
+
     public void setId(long id) {
         this.id = id;
     }
 
-    public BigDecimal getPrice() {
+    public long getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 
@@ -44,8 +64,10 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return "Ticket{" + "id=" + id + ", price=" + price + ", customer=" + ", category=" + category + '}';
+        return "Ticket{" + "id=" + id + ", price=" + price + ", category=" + category + ", itinaryId=" + itinaryId + ", customerId=" + customerId + '}';
     }
+
+    
     
     
 

@@ -15,9 +15,8 @@ public class Customer {
     private String category;
     
 
-    public Customer(long id, String Name, String nationality, String email, String address, String category) throws CustomerException {
-        if(!GeneralUtility.isValidEmail(email))
-            throw new CustomerException("Invalid email.Please try again");
+    public Customer(long id, String Name, String email, String address, String nationality, String category) throws CustomerException {
+        
         this.id = id;
         this.Name = Name;
         this.nationality = nationality;
@@ -84,7 +83,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" + "id=" + id + ", Name=" + Name + ", nationality=" + nationality + ", email=" + email + ", address=" + address + ", category=" + category + '}';
+        return "Customer{" + "id=" + id + ", Name=" + Name + ", email=" + email + ", address=" + address + ", nationality=" + nationality + ", category=" + category + '}';
     }
     
     

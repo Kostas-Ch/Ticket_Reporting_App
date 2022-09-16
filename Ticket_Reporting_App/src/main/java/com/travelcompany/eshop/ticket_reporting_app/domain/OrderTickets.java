@@ -9,23 +9,36 @@ import java.math.BigDecimal;
 
 public class OrderTickets {
     private Ticket ticket;
-    private BigDecimal itemPrice;
-    private BigDecimal discount;
-    private BigDecimal surcharge;
+    private long itemPrice;
+    private double discount;
+    private double surcharge;
     private Order order;
     private int quantity;
+    private String paymentMethod;
+    
 
-    public OrderTickets(Ticket ticket, BigDecimal itemPrice, BigDecimal discount, BigDecimal surcharge, Order order,int quantity) {
+    public OrderTickets(Ticket ticket, long itemPrice, double discount, double surcharge, Order order,int quantity, String paymentMethod) {
         this.ticket = ticket;
         this.itemPrice = itemPrice;
         this.discount = discount;
         this.surcharge = surcharge;
         this.order = order;
         this.quantity = quantity;
+        this.paymentMethod = paymentMethod;
     }
 
     public OrderTickets() {
     }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    
 
     public int getQuantity() {
         return quantity;
@@ -43,27 +56,27 @@ public class OrderTickets {
         this.ticket = ticket;
     }
 
-    public BigDecimal getItemPrice() {
+    public long getItemPrice() {
         return itemPrice;
     }
 
-    public void setItemPrice(BigDecimal itemPrice) {
+    public void setItemPrice(long itemPrice) {
         this.itemPrice = itemPrice;
     }
 
-    public BigDecimal getDiscount() {
+    public double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(BigDecimal discount) {
+    public void setDiscount(double discount) {
         this.discount = discount;
     }
 
-    public BigDecimal getSurcharge() {
+    public double getSurcharge() {
         return surcharge;
     }
 
-    public void setSurcharge(BigDecimal surcharge) {
+    public void setSurcharge(double surcharge) {
         this.surcharge = surcharge;
     }
 

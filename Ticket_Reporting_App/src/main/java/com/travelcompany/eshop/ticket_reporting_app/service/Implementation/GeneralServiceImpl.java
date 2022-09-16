@@ -48,8 +48,8 @@ public class GeneralServiceImpl implements GeneralService {
     
     @Override
     public void loadInitialCustomerData(){
-        for(String currentCustomer: GeneralUtility.customers) {
-            String[] name= currentCustomer.split(",") ;
+        for(String currentCustomer : GeneralUtility.customers) {
+            String[] name = currentCustomer.split(",") ;
             try{            
                 Customer customer = new Customer(
                         Long.parseLong(name[0]), name[1],name[2], name[3], name[4],name[5]);
@@ -64,12 +64,12 @@ public class GeneralServiceImpl implements GeneralService {
     
     @Override
     public void loadInitialTicketData(){
-    for(String currentTicket: GeneralUtility.tickets) {
+    for(String currentTicket : GeneralUtility.tickets) {
             String[] name= currentTicket.split(",") ;
               try{          
                 Ticket ticket = new Ticket(
-                        Long.parseLong(name[0]), new BigDecimal(name[1]), Category.valueOf(name[2]));
-                if (GeneralUtility.isValidTicket(ticket))
+                        Long.parseLong(name[0]), Long.parseLong(name[1]), Long.parseLong(name[2]), Long.parseLong(name[3]), Category.valueOf(name[4]));
+                
                     ticketRepository.addTicket(ticket);
               }
               catch (TicketException ticketException){
@@ -83,15 +83,16 @@ public class GeneralServiceImpl implements GeneralService {
     public void loadInitialItinaryData(){
     for(String currentItinary: GeneralUtility.itinaries) {
             String[] name= currentItinary.split(",") ;
-             try{           
-                Itinary itinary = new Itinary(
-                        Long.parseLong(name[0]), name[1], name[2],name[3],name[4],new BigDecimal(name[5]));
-                if (GeneralUtility.isValidItinary(itinary))
-                    itinaryRepository.addItinary(itinary);
-             }
-             catch (ItinaryException itinaryException){
-                 System.out.println("Error adding itinary");
-             }
+           
+            try{
+            Itinary itinary = new Itinary(
+                    Long.parseLong(name[0]), name[1], name[2],name[3],name[4],Long.parseLong(name[5]));
+            if (GeneralUtility.isValidItinary(itinary))
+                itinaryRepository.addItinary(itinary);
+            }
+            catch (ItinaryException itinaryException){
+                    System.out.println("Error adding itinary");
+                    }
     }
     
     
@@ -115,7 +116,10 @@ public class GeneralServiceImpl implements GeneralService {
             
             orderTicket.setTicket(ticket);
             orderTicket.setItemPrice(ticket.getPrice());
-            orderTicket.setDiscount(BigDecimal.ZERO);
+            GeneralUtility.isBuisiness(orderTicket);
+            GeneralUtility.isPayedByCreditCard(orderTicket);
+            if(GeneralUtility.isBuisiness(orderTicket) && GeneralUtility.isPayedByCreditCard(orderTicket) == true )
+                orderTicket.setDiscount(0.2);
             orderTicket.setQuantity(1);
 
             order.getOrderTickets().add(orderTicket);
@@ -163,9 +167,9 @@ public class GeneralServiceImpl implements GeneralService {
     @Override
     public String displayTickets() {
         StringBuilder returnValue= new StringBuilder();
-        returnValue.append("Available items");
-        for(Ticket item: ticketRepository.readTicket()){
-            returnValue.append( item);
+        returnValue.append("Available tickets: ");
+        for(Ticket ticket: ticketRepository.readTicket()){
+            returnValue.append(ticket);
         }
         returnValue.append("-------------------------------------------\n");
         return returnValue.toString();
@@ -174,7 +178,7 @@ public class GeneralServiceImpl implements GeneralService {
     @Override
     public String displayCustomers() {
         StringBuilder returnValue= new StringBuilder();
-        returnValue.append("Available customers");
+        returnValue.append("Available customers: ");
         for(Customer customer: customerRepository.readCustomer()){
             returnValue.append(customer);
         }
@@ -186,7 +190,10 @@ public class GeneralServiceImpl implements GeneralService {
         return null;
     }
    
-    }
+    
+    
+    
+}
     
     
     
