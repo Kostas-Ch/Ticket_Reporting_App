@@ -17,7 +17,7 @@ import java.util.List;
  * @author Kostas Chatzifotiadis
  */
 public class TicketRepoImpl implements TicketRepository {
-   private List<Ticket> tickets; 
+   private final List<Ticket> tickets; 
    
    
    public TicketRepoImpl() {

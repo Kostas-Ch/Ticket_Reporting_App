@@ -9,16 +9,16 @@ import java.time.LocalDateTime;
 public class Ticket {
     private long id;
     private long price;
-    private Category category;
+    private String paymentMethod;
     private long itinaryId;
     private long customerId;
 
-    public Ticket(long id, long customerId,long itinaryId, long price,  Category category) throws TicketException {
+    public Ticket(long id, long customerId,long itinaryId, String paymentMethod, long price  ) throws TicketException {
         this.id = id;
         this.customerId = customerId;
         this.itinaryId = itinaryId;
+        this.paymentMethod = paymentMethod;
         this.price = price;
-        this.category = category;
     }
 
     public long getId() {
@@ -53,18 +53,20 @@ public class Ticket {
         this.price = price;
     }
 
-
-    public Category getCategory() {
-        return category;
+    public String getPaymentMethod() {
+        return paymentMethod;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
+
+
+    
 
     @Override
     public String toString() {
-        return "Ticket{" + "id=" + id + ", price=" + price + ", category=" + category + ", itinaryId=" + itinaryId + ", customerId=" + customerId + '}';
+        return "Ticket {" + " id = " + id + ", price = " + price + ", paymentMethod = " + paymentMethod + ", itinaryId = " + itinaryId + ", customerId = " + customerId + '}'+' ';
     }
 
     

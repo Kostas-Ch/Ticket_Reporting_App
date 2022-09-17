@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 
 public class Customer {
-    private long id;
+    private long customerId;
     private String Name;
     private String nationality;
     private String email;
@@ -15,9 +15,9 @@ public class Customer {
     private String category;
     
 
-    public Customer(long id, String Name, String email, String address, String nationality, String category) throws CustomerException {
+    public Customer(long customerId, String Name, String email, String address, String nationality, String category) throws CustomerException {
         
-        this.id = id;
+        this.customerId = customerId;
         this.Name = Name;
         this.nationality = nationality;
         this.email = email;
@@ -45,17 +45,15 @@ public class Customer {
         this.category = category;
     }
 
-    
-
-    
-    public long getId() {
-        return id;
+    public long getCustomerId() {
+        return customerId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
     }
 
+ 
     public String getName() {
         return Name;
     }
@@ -83,7 +81,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" + "id=" + id + ", Name=" + Name + ", email=" + email + ", address=" + address + ", nationality=" + nationality + ", category=" + category + '}';
+        return "Customer {" + " id = " + customerId + ", Name = " + Name + ", email = " + email + ", address = " + address + ", nationality = " + nationality + ", category = " + category + '}'+' ';
     }
     
     

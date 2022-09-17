@@ -17,11 +17,11 @@ public class Ticket_Reporting_App {
     public static void main(String[] args) {
         GeneralService service = new GeneralServiceImpl();
         service.loadInitialCustomerData();
-       // service.loadInitialItinaryData();
+        service.loadInitialItinaryData();
         service.loadInitialTicketData();
         
         System.out.println(service.displayCustomers());
-        //System.out.println(service.displayItinaries());
+        System.out.println(service.displayItinaries());
         System.out.println(service.displayTickets());
     }
 }

@@ -80,7 +80,7 @@ public class Itinary {
 
     @Override
     public String toString() {
-        return "Itinary{" + "id=" + id + ", departureAirportCode=" + departureAirportCode + ", destinationAirportCode=" + destinationAirportCode + ", departureDate=" + departureDate + ", airline=" + airline + ", basicPrice=" + basicPrice + '}';
+        return "Itinary {" + "id = " + id + ", departureAirportCode = " + departureAirportCode + ", destinationAirportCode = " + destinationAirportCode + ", departureDate = " + departureDate + ", airline = " + airline + ", basicPrice = " + basicPrice + '}'+' ';
     }
     
     

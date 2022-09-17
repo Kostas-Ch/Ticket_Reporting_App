@@ -65,10 +65,10 @@ public class GeneralServiceImpl implements GeneralService {
     @Override
     public void loadInitialTicketData(){
     for(String currentTicket : GeneralUtility.tickets) {
-            String[] name= currentTicket.split(",") ;
+            String[] name1= currentTicket.split(",") ;
               try{          
                 Ticket ticket = new Ticket(
-                        Long.parseLong(name[0]), Long.parseLong(name[1]), Long.parseLong(name[2]), Long.parseLong(name[3]), Category.valueOf(name[4]));
+                        Long.parseLong(name1[0]), Long.parseLong(name1[1]), Long.parseLong(name1[2]), name1[3], Long.parseLong(name1[4]));
                 
                     ticketRepository.addTicket(ticket);
               }
@@ -155,7 +155,7 @@ public class GeneralServiceImpl implements GeneralService {
         StringBuilder returnValue= new StringBuilder();
         returnValue.append(customer).append("\n");       
         for (Order order: orderRepository.readOrder()){
-            if (order.getCustomer().getId() == customerId)
+            if (order.getCustomer().getCustomerId() == customerId)
                     returnValue.append(order).append("\n");
         }
         return returnValue.toString();
@@ -187,8 +187,16 @@ public class GeneralServiceImpl implements GeneralService {
     }
     
     public String displayItinaries(){
-        return null;
-    }
+        StringBuilder returnValue= new StringBuilder();
+        returnValue.append("Available itinaries: ");
+        for(Itinary itinary: itinaryRepository.readItinary()){
+            returnValue.append(itinary);
+        }
+        returnValue.append("-------------------------------------------\n");
+        
+        
+        
+        return returnValue.toString();    }
    
     
     

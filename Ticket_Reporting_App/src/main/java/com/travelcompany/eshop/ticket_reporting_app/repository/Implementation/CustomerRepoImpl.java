@@ -24,7 +24,7 @@ public class CustomerRepoImpl implements CustomerRepository{
     @Override
     public boolean addCustomer(Customer customer) {
         for(int i=0; i<customers.size(); i++){
-            if(customers.get(i).getId() == customer.getId() )
+            if(customers.get(i).getCustomerId() == customer.getCustomerId() )
                 return false;
         }
         if (! GeneralUtility.isValidCustomer(customer))
@@ -42,7 +42,7 @@ public class CustomerRepoImpl implements CustomerRepository{
     @Override
     public Customer readCustomer(long customerId) {
         for (int index = 0; index < customers.size(); index ++){
-            if (customers.get(index).getId() == customerId)
+            if (customers.get(index).getCustomerId() == customerId)
                 return customers.get(index);
         }
         return null;
