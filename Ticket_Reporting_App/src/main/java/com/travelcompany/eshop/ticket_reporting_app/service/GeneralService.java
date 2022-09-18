@@ -16,6 +16,8 @@ public interface GeneralService {
     String displayTickets();
     String displayCustomers();
     String displayItinaries();
-    
+    String displayReport();   
+    String displayReport1();
+    String displayReport2();
     
 }

@@ -9,19 +9,17 @@ import java.math.BigDecimal;
 
 public class OrderTickets {
     private Ticket ticket;
-    private long itemPrice;
-    private double discount;
-    private double surcharge;
+    private double itemPrice;
+    private double discount;   
     private Order order;
     private int quantity;
     private String paymentMethod;
     
 
-    public OrderTickets(Ticket ticket, long itemPrice, double discount, double surcharge, Order order,int quantity, String paymentMethod) {
+    public OrderTickets( Ticket ticket, double itemPrice, double discount, Order order, int quantity, String paymentMethod) {
         this.ticket = ticket;
         this.itemPrice = itemPrice;
         this.discount = discount;
-        this.surcharge = surcharge;
         this.order = order;
         this.quantity = quantity;
         this.paymentMethod = paymentMethod;
@@ -56,11 +54,11 @@ public class OrderTickets {
         this.ticket = ticket;
     }
 
-    public long getItemPrice() {
+    public double getItemPrice() {
         return itemPrice;
     }
 
-    public void setItemPrice(long itemPrice) {
+    public void setItemPrice(double itemPrice) {
         this.itemPrice = itemPrice;
     }
 
@@ -72,13 +70,7 @@ public class OrderTickets {
         this.discount = discount;
     }
 
-    public double getSurcharge() {
-        return surcharge;
-    }
-
-    public void setSurcharge(double surcharge) {
-        this.surcharge = surcharge;
-    }
+    
 
     public Order getOrder() {
         return order;
@@ -90,7 +82,7 @@ public class OrderTickets {
 
     @Override
     public String toString() {
-        return "OrderTickets{" + "ticket=" + ticket + ", itemPrice=" + itemPrice + ", discount=" + discount + ", surcharge=" + surcharge + ", order=" + order + '}';
+        return "OrderTickets{" + "ticket=" + ticket + ", itemPrice=" + itemPrice + ", discount=" + discount + ", order=" + order + '}';
     }
     
     

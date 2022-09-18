@@ -8,6 +8,7 @@ import com.travelcompany.eshop.ticket_reporting_app.domain.Customer;
 import com.travelcompany.eshop.ticket_reporting_app.domain.Itinary;
 import com.travelcompany.eshop.ticket_reporting_app.domain.OrderTickets;
 import com.travelcompany.eshop.ticket_reporting_app.domain.Ticket;
+import com.travelcompany.eshop.ticket_reporting_app.repository.CustomerRepository;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,15 +20,15 @@ public class GeneralUtility {
     
     //long id, String name, String email, String address, String nationality, String Category
     public static String[] customers = {
-        "1, Maria Iordanou,miordanou@mail.com,Athens,Greek,Individual",
-        "2, Dimitriou Dimitrios,ddimitriou@mail.com,Athens,Greek,Individual",
-        "3, Ioannis Ioannou, iioannou@mail.com, Athens, Greek, Business",
-        "4, Antonio Molinari, amolinari@mail.com, Milan, Italian, Individual",
-        "5, Frederico Rossi, frossi@mail.com, Milan, Italian, Individual",
-        "6, Mario Conti, mconti@mail.com, Rome, Italian, Business",
-        "7, Nathan Martin, nmartin@mail.com, Athens, French, Business",
-        "8, Enzo Collin, ecollin@mail.com, Athens, French, Individual",
-        "9, Frederic Michel, fmichel@mail.com, Athens, French, Individual",
+        "1,Maria Iordanou,miordanou@mail.com,Athens,Greek,Individual",
+        "2,Dimitriou Dimitrios,ddimitriou@mail.com,Athens,Greek,Individual",
+        "3,Ioannis Ioannou,iioannou@mail.com,Athens,Greek,Business",
+        "4,Antonio Molinari,amolinari@mail.com,Milan,Italian,Individual",
+        "5,Frederico Rossi,frossi@mail.com,Milan,Italian,Individual",
+        "6,Mario Conti,mconti@mail.com,Rome,Italian,Business",
+        "7,Nathan Martin,nmartin@mail.com,Athens,French,Business",
+        "8,Enzo Collin,ecollin@mail.com,Athens,French,Individual",
+        "9,Frederic Michel,fmichel@mail.com,Athens,French,Individual",
     };
     //long id, String departure airport code, String destination airport code, String departure date, String airline, long basic price
     public static String[] itinaries = {
@@ -81,19 +82,20 @@ public class GeneralUtility {
             return false;
             
         else
-            orderticket.setDiscount(0.1);
+            
         
         return true;
     }
     
-    public static boolean isBuisiness(OrderTickets orderticket){
-        Customer customer = new Customer();
-       if( customer.getCategory().toLowerCase() == "business")
-        orderticket.setDiscount(0.1);
-       else 
-        orderticket.setSurcharge(0.2);   
+    public static boolean isBuisiness(String customerCategory){
         
-        return true;
+ 
+       if( customerCategory.toLowerCase() == "business")
+         return true;
+       else 
+        return false; 
+        
+        
     }
     
     

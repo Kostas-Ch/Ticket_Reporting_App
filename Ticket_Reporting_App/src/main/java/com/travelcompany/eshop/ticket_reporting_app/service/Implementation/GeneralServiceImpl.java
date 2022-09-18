@@ -26,6 +26,7 @@ import com.travelcompany.eshop.ticket_reporting_app.utility.GeneralUtility;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -104,6 +105,7 @@ public class GeneralServiceImpl implements GeneralService {
         Order order = new Order();
         order.setId(orderId);
         
+        
         Customer customer = customerRepository.readCustomer(customerId);
         if (customer == null) return null;
         order.setCustomer(customer);
@@ -113,21 +115,40 @@ public class GeneralServiceImpl implements GeneralService {
             OrderTickets orderTicket = new OrderTickets();
             orderTicket.setOrder(order);
             Ticket ticket = ticketRepository.readTicket(ticketId);
-            
+            orderTicket.setPaymentMethod(ticket.getPaymentMethod());
             orderTicket.setTicket(ticket);
-            orderTicket.setItemPrice(ticket.getPrice());
-            GeneralUtility.isBuisiness(orderTicket);
-            GeneralUtility.isPayedByCreditCard(orderTicket);
-            if(GeneralUtility.isBuisiness(orderTicket) && GeneralUtility.isPayedByCreditCard(orderTicket) == true )
+            //orderTicket.setItemPrice(ticket.getPrice());
+           if ( GeneralUtility.isBuisiness(customer.getCategory()) == true){
+               orderTicket.setDiscount(0.1);
+               orderTicket.setItemPrice(ticket.getPrice() - ((orderTicket.getDiscount()) * (ticket.getPrice()))  );
+           }
+           else {
+               orderTicket.setDiscount(0.2);
+               double newItemPrice = ticket.getPrice() + ((orderTicket.getDiscount()) * (ticket.getPrice()));
+               orderTicket.setItemPrice(newItemPrice);
+           }
+           
+            
+            if(GeneralUtility.isBuisiness(customer.getCategory()) && GeneralUtility.isPayedByCreditCard(orderTicket) == true ){
                 orderTicket.setDiscount(0.2);
+                orderTicket.setItemPrice(ticket.getPrice() + ((orderTicket.getDiscount()) * (ticket.getPrice())));
+            }
+            else if(GeneralUtility.isBuisiness(customer.getCategory()) == false && GeneralUtility.isPayedByCreditCard(orderTicket) == true ){
+                orderTicket.setDiscount(0.1);
+                orderTicket.setItemPrice(ticket.getPrice() - ((orderTicket.getDiscount()) * (ticket.getPrice()))  );
+            }
+            
+            else 
+            {orderTicket.setItemPrice(orderTicket.getItemPrice());
+                
+            }
             orderTicket.setQuantity(1);
-
             order.getOrderTickets().add(orderTicket);
         }
         orderRepository.addOrder(order);
         return order;
+}       
     
-    }
      
       @Override
     public String displayOrder(long orderId) {
@@ -137,11 +158,11 @@ public class GeneralServiceImpl implements GeneralService {
             .append("Customer: ").append(order.getCustomer()).append("\n") 
             .append("Items in the order").append("\n");
         int index = 0;
-        for (OrderTickets item: order.getOrderTickets()){
+        for (OrderTickets orderTicket: order.getOrderTickets()){
             returnString.append("")
                     .append(++index)
                     .append(". ")
-                    .append(item)
+                    .append(orderTicket)
                     .append("\n");
         }
         return returnString.toString();
@@ -171,7 +192,7 @@ public class GeneralServiceImpl implements GeneralService {
         for(Ticket ticket: ticketRepository.readTicket()){
             returnValue.append(ticket);
         }
-        returnValue.append("-------------------------------------------\n");
+        
         return returnValue.toString();
     }
 
@@ -182,7 +203,7 @@ public class GeneralServiceImpl implements GeneralService {
         for(Customer customer: customerRepository.readCustomer()){
             returnValue.append(customer);
         }
-        returnValue.append("-------------------------------------------\n");
+        
         return returnValue.toString();
     }
     
@@ -191,17 +212,99 @@ public class GeneralServiceImpl implements GeneralService {
         returnValue.append("Available itinaries: ");
         for(Itinary itinary: itinaryRepository.readItinary()){
             returnValue.append(itinary);
+        }              
+               
+        return returnValue.toString();   
+    }
+    
+    public String displayReport(){
+        // List of the total number and list of the cost of tickets for all customers
+            String oo= " ";
+            int counter=0;
+            long costOfTicket=0;
+            long sumOfTickets=0;
+        for(Ticket ticket: ticketRepository.readTicket()){
+             costOfTicket = ticket.getPrice();  
+             sumOfTickets = costOfTicket + sumOfTickets;
+             counter++;           
         }
-        returnValue.append("-------------------------------------------\n");
         
-        
-        
-        return returnValue.toString();    }
+        return ("Number of Tickets: "+ counter + " Total cost of tickets: " + sumOfTickets).toString();
+        }
+    public String displayReport1(){
+        //List of the total offered itineraries per destination and offered itineraries per departure
+            List destinations = new ArrayList();    
+            List departures = new ArrayList();
+            int i =0;
+            int j = 0;
+            int par=0;
+            int lon=0;
+            int ams=0;
+            int dub=0;
+            int fra=0;
+            int mex=0;
+            int ath=0;
+            for(Itinary itinary: itinaryRepository.readItinary()){              
+                destinations.add(itinary.getDestinationAirportCode());
+                departures.add(itinary.getDepartureAirportCode());             
+            }
+            par = Collections.frequency(destinations, "PAR");
+            lon = Collections.frequency(destinations, "LON");
+            ams = Collections.frequency(destinations, "AMS");
+            dub = Collections.frequency(destinations, "DUB");
+            fra = Collections.frequency(destinations, "FRA");
+            mex = Collections.frequency(destinations, "MEX");
+            ath = Collections.frequency(departures, "ATH");
+            
+            return ("Total itineraries per destination: "+" ATH:"+ ath +" || "+ "Total itineraries per departure: "+ " PAR :"+ par+ " LON :"+ lon+ " AMS :"+ ams+ " DUB :"+ dub + " FRA :"+ fra+ " MEX :"+ mex ).toString();
+        }
+    
+       public String displayReport2(){
+           //List of the customers with the most tickets and with the largest cost of purchases
+           List passengerId = new ArrayList();    
+           List paymentAmount = new ArrayList();
+           List mostTickets = new ArrayList();
+           List customers = new ArrayList();
+           long payment=0;
+           long totalPayment=0;
+           for(Ticket ticket: ticketRepository.readTicket()){              
+                passengerId.add(Long.toString(ticket.getCustomerId()));
+                paymentAmount.add(Long.toString(ticket.getPrice()));     
+                if(ticket.getCustomerId()== 2){
+                    payment =+ ticket.getPrice();
+                    totalPayment = payment + totalPayment;
+                }
+            }
+           for (int i=1 ; i <= passengerId.size(); i++){
+           mostTickets.add(Collections.frequency(passengerId, Integer.toString(i)));
+           }
+           for(Customer customer: customerRepository.readCustomer()){
+               customers.add(customer.getName());
+           }
+           
+           
+           System.out.println("Total number of Purchases per Customer: ");
+           
+           return customers.get(0).toString() + ": "+ mostTickets.get(0)+ " "+customers.get(1).toString() + ": "+ mostTickets.get(1)+ " "+customers.get(2).toString() + ": "+ mostTickets.get(2)
+                  + " " + customers.get(3).toString() + ": "+ mostTickets.get(3)+ " "+customers.get(4).toString() +": "+ mostTickets.get(4)
+                  + " " +customers.get(5).toString() + ": "+ mostTickets.get(5)+ " "+customers.get(6).toString() + ": "+ mostTickets.get(6)
+                  + " " +customers.get(7).toString() + ": "+ mostTickets.get(7)+" "+customers.get(8).toString() + ": "+ mostTickets.get(8)
+                  +"\n" +"The largest cost of purchases are: "+ customers.get(1).toString()+" "+ totalPayment;
+       }
+       
+       
+    }
+    
+    
+    
+    
+    
+    
    
+
+  
     
-    
-    
-}
+
     
     
     

@@ -2,8 +2,7 @@
 package com.travelcompany.eshop.ticket_reporting_app.domain;
 
 import com.travelcompany.eshop.ticket_reporting_app.exception.TicketException;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+
 
 
 public class Ticket {
